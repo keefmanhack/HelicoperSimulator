@@ -1,0 +1,11 @@
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\bin\Debug\netcoreapp2.1\SimulationVariableQuerier.deps.json
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\bin\Debug\netcoreapp2.1\SimulationVariableQuerier.runtimeconfig.json
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\bin\Debug\netcoreapp2.1\SimulationVariableQuerier.runtimeconfig.dev.json
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\bin\Debug\netcoreapp2.1\SimulationVariableQuerier.dll
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\bin\Debug\netcoreapp2.1\SimulationVariableQuerier.pdb
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\obj\Debug\netcoreapp2.1\SimulationVariableQuerier.csprojAssemblyReference.cache
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\obj\Debug\netcoreapp2.1\SimulationVariableQuerier.csproj.CoreCompileInputs.cache
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\obj\Debug\netcoreapp2.1\SimulationVariableQuerier.AssemblyInfoInputs.cache
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\obj\Debug\netcoreapp2.1\SimulationVariableQuerier.AssemblyInfo.cs
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\obj\Debug\netcoreapp2.1\SimulationVariableQuerier.dll
+C:\Users\gregoire001\Desktop\SimulationVariableQuerier\SimulationVariableQuerier\obj\Debug\netcoreapp2.1\SimulationVariableQuerier.pdb
