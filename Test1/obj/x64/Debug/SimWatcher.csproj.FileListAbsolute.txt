@@ -1,0 +1,12 @@
+D:\MSFS SDK\Samples\Test1\bin\x64\Debug\Simvars.exe.config
+D:\MSFS SDK\Samples\Test1\bin\x64\Debug\Simvars.exe
+D:\MSFS SDK\Samples\Test1\bin\x64\Debug\Simvars.pdb
+D:\MSFS SDK\Samples\Test1\bin\x64\Debug\Microsoft.FlightSimulator.SimConnect.dll
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.Form1.resources
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\Simvars.Properties.Resources.resources
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.csproj.GenerateResource.cache
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.csproj.CoreCompileInputs.cache
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.csproj.CopyComplete
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\Simvars.exe
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\Simvars.pdb
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.csprojAssemblyReference.cache

@@ -5,7 +5,7 @@ using System.IO;
 interface SysVarLoaderInterface
 {
     void loadSysVariables();
-    Hashtable getVarTable();
+    List<object> getVarsAndUnits();
     void setTxtFileLocation(String location);
     String getTxtFileLocation();
 }
@@ -47,8 +47,14 @@ public class SysVarLoaderImplementation: SysVarLoaderInterface
         sr.Close();
     }
 
-    public Hashtable getVarTable()
+    public List<object> getVarsAndUnits()
     {
-        return table;
+        List<object> ret = new List<>();
+
+        for(int i =0; i<table.Keys.length; i++){
+            ret.add({var: table.Keys[i], unit: "meters per second"});
+        }
+
+        return ret;
     }
 }
