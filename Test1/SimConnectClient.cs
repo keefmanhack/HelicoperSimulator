@@ -15,7 +15,6 @@ namespace SimWatcher
 		bool disconnectFromSim();
 		void requestSimData();
 		void addDataRequest(String varName, String varUnits);
-		void onDataReceived();
 	}
 
     public enum DEFINITIONS
@@ -28,14 +27,19 @@ namespace SimWatcher
         REQUEST_1,
     };
 
-    public delegate void Notify();  // delegate
-	class SimConnectClient : SimConnectClientInterface
+    public delegate void Notify(object sender, EventArgs e);  // delegate
+
+    
+
+    class SimConnectClient : SimConnectClientInterface
 	{
 		private SimConnect simconnect;
     	// User-defined win32 event
         const int WM_USER_SIMCONNECT = 0x0402;
         public ObservableCollection<SimvarRequest> lSimvarRequests { get; private set; }
         public ObservableCollection<uint> lObjectIDs { get; private set; }
+
+        private IntPtr ptr = new IntPtr(0);
 
         public event Notify DataReceived;
 
@@ -172,15 +176,16 @@ namespace SimWatcher
                     oSimvarRequest.bStillPending = false;
 
                     // Console.WriteLine(oSimvarRequest.sName + ": " + dValue);
-                    onDataReceived(oSimvarRequest.sName, dValue);
+
+                    onDataReceived(new DataReceivedEventArgs(oSimvarRequest.sName, dValue));
                 }
             }
         }
 
-        protected virtual void onDataReceived(String name, double value) //protected virtual method
+        protected virtual void onDataReceived(DataReceivedEventArgs e) //protected virtual method
 	    {
 	        //if ProcessCompleted is not null then call delegate
-	        DataReceived?.Invoke(); 
+	        DataReceived?.Invoke(this, e); 
 	    }
 
         private void simconnect_OnRecvOpen(SimConnect sender, SIMCONNECT_RECV_OPEN data)
@@ -199,7 +204,7 @@ namespace SimWatcher
 
         private void simconnect_OnRecvException(SimConnect sender, SIMCONNECT_RECV_EXCEPTION data)
         {
-            displayText("Exception received: " + data.dwException);
+            Console.WriteLine("Exception received: " + data.dwException);
         }
 
 
@@ -239,8 +244,7 @@ namespace SimWatcher
         {
             try
             {
-                AddRequest("Vertical Speed", "meters per second");
-                AddRequest("Velocity Body X", "meters per second");
+
 
                 foreach (SimvarRequest oSimvarRequest in lSimvarRequests)
                 {
@@ -254,7 +258,7 @@ namespace SimWatcher
             }
             catch (COMException ex)
             {
-                displayText(ex.Message);
+                Console.WriteLine(ex);
             }
         }
 	}

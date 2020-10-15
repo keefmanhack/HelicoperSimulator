@@ -7,6 +7,7 @@ using Microsoft.FlightSimulator.SimConnect;
 using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
+using Simvars;
 
 namespace SimWatcher
 {
@@ -23,25 +24,37 @@ namespace SimWatcher
     {        
         SimConnectClient scc;
         SysVarLoader svl;
+        string testFileLocation = @"D:\MSFS SDK\Samples\Test1\sysVars.txt";
 
         public SysQuerierImp(){
             scc = new SimConnectClient();
-            scc.DataReceived += dataReceived();
+            scc.DataReceived += dataReceived;
 
             svl = new SysVarLoader();
-            svl.setTxtFileLocation("doesn't exists yet");
+            svl.setTxtFileLocation(testFileLocation);
             svl.loadSysVariables();
+        }
+
+        public bool handleDef(ref Message m)
+        {
+            return scc.handleDefWndProc(ref m);
         }
 
 
         public bool connectToSim(IntPtr ptr){
-            return scc.attempClientConnect(IntPtr ptr);
+            return scc.attempClientConnect(ptr);
+        }
+
+        public void disconnectFromSim()
+        {
+            scc.disconnectFromSim();
         }
 
         public void loadRequestVariables(){
             List<object> varsAndUnits = svl.getVarsAndUnits();
-            for(int i =0; i<varsAndUnits.size(); i++){
-                scc.addDataRequest(varsAndUnits[i].var, varsAndUnits[i].unit);
+            for(int i =0; i<varsAndUnits.Count; i++){
+                keyUnit temp = (keyUnit)varsAndUnits[i];
+                scc.addDataRequest(temp.key, temp.unit);
             }
         }
 
@@ -50,8 +63,10 @@ namespace SimWatcher
         }
 
 
-        private static void dataReceived(object sender, EventArgs e){
-            Console.WriteLine("Data Received");
+        private void dataReceived(object sender, EventArgs e)
+        {
+            var x = (DataReceivedEventArgs)e;
+            Console.WriteLine(x.name + ": " + x.value);
         }
 
     }

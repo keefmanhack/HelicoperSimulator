@@ -38,6 +38,7 @@ namespace SimWatcher
         {
             if (sq.connectToSim(this.Handle))
             {
+                sq.loadRequestVariables();
                 setButtons(false, true);
             }
             else
@@ -63,11 +64,9 @@ namespace SimWatcher
 
         protected override void DefWndProc(ref Message m)
         {
-            if(sq != null)
+            if(!sq.handleDef(ref m))
             {
-                if (!sq.handleDefWndProc(ref m)) {
-                    base.DefWndProc(ref m);
-                }
+                base.DefWndProc(ref m);
             }
         }
     }

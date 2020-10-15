@@ -9,4 +9,16 @@ D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.csproj.CoreCompileInputs.cach
 D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.csproj.CopyComplete
 D:\MSFS SDK\Samples\Test1\obj\x64\Debug\Simvars.exe
 D:\MSFS SDK\Samples\Test1\obj\x64\Debug\Simvars.pdb
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\SimWatcher.csprojAssemblyReference.cache
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\SimWatcher.Form1.resources
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\Simvars.Properties.Resources.resources
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\SimWatcher.csproj.GenerateResource.cache
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\SimWatcher.csproj.CoreCompileInputs.cache
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\Simvars.exe
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\Simvars.pdb
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\bin\x64\Debug\Simvars.exe.config
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\bin\x64\Debug\Simvars.exe
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\bin\x64\Debug\Simvars.pdb
+C:\Users\admin\Downloads\HelicoperSimulator-main (1)\HelicoperSimulator-main\Test1\obj\x64\Debug\SimWatcher.csproj.CopyComplete
+D:\MSFS SDK\Samples\Test1\obj\x64\Debug\Simvars.g.resources
 D:\MSFS SDK\Samples\Test1\obj\x64\Debug\SimWatcher.csprojAssemblyReference.cache
