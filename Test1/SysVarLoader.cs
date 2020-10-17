@@ -51,6 +51,10 @@ namespace SimWatcher
             sr.Close();
         }
 
+        public void setKeyValue(String key, object val){
+            this.table[key] = val;
+        }
+
         public List<object> getVarsAndUnits()
         {
             List<object> ret = new List<object>();
@@ -63,6 +67,10 @@ namespace SimWatcher
             }
 
             return ret;
+        }
+
+        public Hashtable getTable(){
+            return this.table;
         }
     }
 }

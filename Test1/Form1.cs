@@ -19,8 +19,18 @@ namespace SimWatcher
         {
             InitializeComponent();
             sq = new SysQuerierImp();
+            sq.DataDispatch += dataReceived;
+
             setButtons(true, false);
         }
+
+        private void dataReceived(object sender, EventArgs e)
+        {
+            Console.Writeline("Data received");
+        }
+
+
+
         private void setButtons(bool bConnect, bool bGet)
         {
             btnConnect.Enabled = bConnect;
