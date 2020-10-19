@@ -135,7 +135,7 @@ namespace SimWatcher
                     oSimvarRequest.bStillPending = true;
                 }
             }
-            Console.WriteLine("Request Sent");
+            //Console.WriteLine("Request Sent");
         }
 
         public bool handleDefWndProc(ref Message m)

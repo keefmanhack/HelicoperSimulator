@@ -66,6 +66,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="DataReceivedEventArgs.cs" />
+    <Compile Include="DequeueEventArgs.cs" />
     <Compile Include="keyUnit.cs" />
     <Compile Include="SimConnectClient.cs" />
     <Compile Include="SysQuerierImp.cs" />

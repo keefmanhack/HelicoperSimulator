@@ -8,15 +8,17 @@ using System.Runtime.InteropServices;
 using System.Windows.Forms;
 using System.Collections.ObjectModel;
 using Simvars;
+using System.Collections;
+using System.Windows.Threading;
 
 namespace SimWatcher
 {
     interface SysQuerier
     {
         bool connectToSim(IntPtr ptr);
-        void loadRequestVariables();
-        void requestSimData();
-        void setRequestFrequency();
+        //void loadRequestVariables();
+        void requestSimData(object sender, EventArgs e);
+        void setRequestFrequency(TimeSpan time);
         // void printData();
         bool disconnectFromSim();
     }
@@ -25,6 +27,9 @@ namespace SimWatcher
     {   
         string TEST_FILE_LOCATION = @"D:\MSFS SDK\Samples\Test1\sysVars.txt";
         int MAX_QUEUE_COUNT = 5;
+        TimeSpan QUERY_TIMER_DEFAULT = new TimeSpan(0, 0, 0, 0, 500); //default to 1 second
+        TimeSpan DEQUEUE_TIMER_DEFAULT = new TimeSpan(0, 0, 0, 1, 0); //default to 2 second
+
 
         SimConnectClient scc;
         SysVarLoader svl;
@@ -43,15 +48,7 @@ namespace SimWatcher
             svl.setTxtFileLocation(TEST_FILE_LOCATION);
             svl.loadSysVariables();
 
-            //setup for request timer
-            request_Timer = new DispatcherTimer();
-            request_Timer.Interval = new TimeSpan(0, 0, 0, 1, 0); //default to 1 second
-            request_Timer.Tick += new EventHandler(requestSimData);
-
-            //setup for queue pop timer
-            queue_Timer = new DispatcherTimer();
-            queue_Timer.Interval = new TimeSpan(0, 0, 0, 2, 0); //default to 1 second
-            queue_Timer.Tick += new EventHandler(dispatchDequeue);
+            initializeEventTimers();
 
             q = new Queue<Hashtable>(MAX_QUEUE_COUNT);
         }
@@ -67,15 +64,29 @@ namespace SimWatcher
 
 
         public bool connectToSim(IntPtr ptr){
-            return scc.attempClientConnect(ptr);
+            if (scc.attempClientConnect(ptr))
+            {
+                loadRequestVariables();
+                request_Timer.Start();
+                queue_Timer.Start();
+
+                return true;
+            }
+            return false;
         }
 
-        public void disconnectFromSim()
+        public bool disconnectFromSim()
         {
-            scc.disconnectFromSim();
+            if (scc.disconnectFromSim())
+            {
+                request_Timer.Start();
+                queue_Timer.Start();
+                return true;
+            }
+            return false;
         }
 
-        public void loadRequestVariables(){
+        private void loadRequestVariables(){
             List<object> varsAndUnits = svl.getVarsAndUnits();
             for(int i =0; i<varsAndUnits.Count; i++){
                 keyUnit temp = (keyUnit)varsAndUnits[i];
@@ -83,11 +94,25 @@ namespace SimWatcher
             }
         }
 
-        public void requestSimData(){
+        public void requestSimData(object sender, EventArgs e)
+        {
             scc.requestSimData();
-
+            Console.WriteLine("Data requested");
             //hashtable should have received all of the data by the next call of this function
             q.Enqueue(svl.getTable());
+        }
+
+        private void initializeEventTimers()
+        {
+            //setup for request timer
+            request_Timer = new DispatcherTimer();
+            request_Timer.Interval = QUERY_TIMER_DEFAULT;
+            request_Timer.Tick += new EventHandler(requestSimData);
+
+            //setup for queue pop timer
+            queue_Timer = new DispatcherTimer();
+            queue_Timer.Interval = DEQUEUE_TIMER_DEFAULT;
+            queue_Timer.Tick += new EventHandler(dispatchDequeue);
         }
 
 
@@ -95,15 +120,14 @@ namespace SimWatcher
         {
             var x = (DataReceivedEventArgs)e;
             svl.setKeyValue(x.name, x.value);
-
-            Console.WriteLine(x.name + ": " + x.value);
         }
 
-        private void dispatchDequeue(){
-            onDequeue(q.Dequeue());
+        private void dispatchDequeue(object sender, EventArgs e)
+        {
+            onDequeue(new DequeueEventArgs(q.Dequeue()));
         }
 
-        protected virtual void onDequeue(Hashtable e) //protected virtual method
+        protected virtual void onDequeue(DequeueEventArgs e) //protected virtual method
         {
             //if ProcessCompleted is not null then call delegate
             DataDispatch?.Invoke(this, e); 

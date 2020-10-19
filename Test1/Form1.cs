@@ -9,6 +9,8 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using Microsoft.FlightSimulator.SimConnect;
 using System.Runtime.InteropServices;
+using Simvars;
+using System.Collections;
 
 namespace SimWatcher
 {
@@ -26,7 +28,13 @@ namespace SimWatcher
 
         private void dataReceived(object sender, EventArgs e)
         {
-            Console.Writeline("Data received");
+            var data = (DequeueEventArgs)e;
+            Hashtable t = data.t;
+            foreach(string key in t.Keys)
+            {
+                Console.WriteLine(key + ": " + t[key]);
+            }
+
         }
 
 
@@ -48,7 +56,6 @@ namespace SimWatcher
         {
             if (sq.connectToSim(this.Handle))
             {
-                sq.loadRequestVariables();
                 setButtons(false, true);
             }
             else
@@ -59,10 +66,7 @@ namespace SimWatcher
 
         private void btnRequest_Click(object sender, EventArgs e)
         {
-            // The following call returns identical information to:
-            // simconnect.RequestDataOnSimObject(DATA_REQUESTS.REQUEST_1, DEFINITIONS.Struct1, SimConnect.SIMCONNECT_OBJECT_ID_USER, SIMCONNECT_PERIOD.ONCE);
-
-            sq.requestSimData();
+            //sq.requestSimData();
         }
 
         
