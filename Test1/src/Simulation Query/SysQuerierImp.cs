@@ -40,12 +40,12 @@ namespace SimWatcher
         public event Notify DataDispatch;
 
 
-        public SysQuerierImp(){
+        public SysQuerierImp(String sysVarFileLocation){ //must be absolute path
             scc = new SimConnectClient();
             scc.DataReceived += dataReceived;
 
             svl = new SysVarLoader();
-            svl.setTxtFileLocation(TEST_FILE_LOCATION);
+            svl.setTxtFileLocation(sysVarFileLocation);
             svl.loadSysVariables();
 
             initializeEventTimers();
