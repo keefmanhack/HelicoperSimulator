@@ -25,10 +25,10 @@ namespace SimWatcher
 
     class SysQuerierImp : SysQuerier
     {   
-        string TEST_FILE_LOCATION = @"D:\MSFS SDK\Samples\Test1\sysVars.txt";
-        int MAX_QUEUE_COUNT = 5;
-        TimeSpan QUERY_TIMER_DEFAULT = new TimeSpan(0, 0, 0, 0, 500); //default to 1 second
-        TimeSpan DEQUEUE_TIMER_DEFAULT = new TimeSpan(0, 0, 0, 1, 0); //default to 2 second
+        // private string TEST_FILE_LOCATION = @"D:\MSFS SDK\Samples\Test1\sysVars.txt";
+        private int MAX_QUEUE_COUNT = 5;
+        private TimeSpan QUERY_TIMER_DEFAULT = new TimeSpan(0, 0, 0, 0, 500); //default to 1 second
+        private TimeSpan DEQUEUE_TIMER_DEFAULT = new TimeSpan(0, 0, 0, 1, 0); //default to 2 second
 
 
         SimConnectClient scc;
@@ -51,6 +51,11 @@ namespace SimWatcher
             initializeEventTimers();
 
             q = new Queue<Hashtable>(MAX_QUEUE_COUNT);
+        }
+
+        public void setRequestFreq(int milliseconds){
+            DEQUEUE_TIMER_DEFAULT = new TimeSpan(0,0,0,0, milliseconds);
+            QUERY_TIMER_DEFAULT = new TimeSpan(0,0,0,0, milliseconds/2);
         }
 
         public bool handleDef(ref Message m)

@@ -6,10 +6,11 @@ namespace SimWatcher
     {   
         private SysQuerierImp sysStateQuer;
         private State sysState;
+        private int queryFreq = 10;
 
         public SystemController(){
             sysStateQuer = new SysQuerierImp(Resources.SysControlVars);
-            //should likely set query frequency here
+            sysStateQuer.setRequestFreq = 1000;
             sq.DataDispatch += handleSimResponse;
             sysState = new WaitingState();
         }
